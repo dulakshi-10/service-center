@@ -11,15 +11,17 @@ import './App.css';  // CSS improt
 function App() {
   return (
     <Router>
-      <div>
+      <div style={{height: '100%'}}>
         <NavbarComponent/>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/order" element={<OrderAService />} />
-          <Route path="/manageVehical" element={<ManageVehical/>}/>
-        </Routes>
+        <div className='main-container'>
+          <Routes>
+            <Route path="/home" element={<Home />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/" element={<Login />} />
+            <Route path="/order" element={<OrderAService />} />
+            <Route path="/manageVehical" element={<ManageVehical/>}/>
+          </Routes>
+        </div>
       </div>
     </Router>
   );

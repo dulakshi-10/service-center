@@ -1,51 +1,19 @@
-import React, { useState } from 'react';
-import {
-  Collapse,
-  Navbar,
-  NavbarToggler,
-  NavbarBrand,
-  Nav,
-  NavItem,
-  NavLink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-  NavbarText,
-} from 'reactstrap';
+import React from 'react';
+import './navbar.css';
 
-function NavbarComponent(args) {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const toggle = () => setIsOpen(!isOpen);
-
+const Navbar = () => {
   return (
-    <div>
-      <Navbar {...args}>
-        <NavbarBrand href="/">Sachith Service Center</NavbarBrand>
-        <NavbarToggler onClick={toggle} />
-        <Collapse isOpen={isOpen} navbar>
-          <Nav className="me-auto" navbar>
-            <NavItem>
-              <NavLink href="/">Home</NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink href="/register">Register</NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink href="/login">Login</NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink href="/order">Order a service</NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink href="/manageVehical">Vehical Management</NavLink>
-            </NavItem>
-          </Nav>
-        </Collapse>
-      </Navbar>
-    </div>
+    <nav className="navbar">
+      <div className="navbar-logo">Sachith Service Center</div>
+      <ul className="navbar-links">
+        <li><a href="/home">Home</a></li>
+        <li><a href="/order">Order a Service</a></li>
+        <li><a href="/manageVehical">Manage Vehicle</a></li>
+        <li><a href="/">Login</a></li>
+        <li><a href="/register">Register</a></li>
+      </ul>
+    </nav>
   );
-}
+};
 
-export default NavbarComponent;
+export default Navbar;

@@ -13,7 +13,29 @@ const VehicleManagement = () => {
   const [mileage, setMileage] = useState('');
   const [chassisNumber, setChassisNumber] = useState('');
   const [madeCountry, setMadeCountry] = useState('');
-  const [vehicleList, setVehicleList] = useState([]);
+  const [vehicleList, setVehicleList] = useState([{
+    name: 'Ford Edge 2011', register: 'CAD - 22321', brand: 'Ford'
+  },{
+    name: 'Ford Edge 2011', register: 'CAD - 22321', brand: 'Ford'
+  },{
+    name: 'Ford Edge 2011', register: 'CAD - 22321', brand: 'Ford'
+  },{
+    name: 'Ford Edge 2011', register: 'CAD - 22321', brand: 'Ford'
+  },{
+    name: 'Ford Edge 2011', register: 'CAD - 22321', brand: 'Ford'
+  },{
+    name: 'Ford Edge 2011', register: 'CAD - 22321', brand: 'Ford'
+  },{
+    name: 'Ford Edge 2011', register: 'CAD - 22321', brand: 'Ford'
+  }, {
+    name: 'Ford Edge 2011', register: 'CAD - 22321', brand: 'Ford'
+  },{
+    name: 'Ford Edge 2011', register: 'CAD - 22321', brand: 'Ford'
+  },{
+    name: 'Ford Edge 2011', register: 'CAD - 22321', brand: 'Ford'
+  },{
+    name: 'Ford Edge 2011', register: 'CAD - 22321', brand: 'Ford'
+  } ]);
 
   const handleAddVehicle = () => {
     const newVehicle = {
@@ -53,147 +75,156 @@ const VehicleManagement = () => {
     setMadeCountry('');
   };
 
+  const CarInfoCard = ({ name, number, brand }) => {
+    return (
+      <div className="car-card">
+        <h3 className="car-card-title">{name}</h3>
+        <p><strong>Number:</strong> {number}</p>
+        <p><strong>Brand:</strong> {brand}</p>
+      </div>
+    );
+  };
+
   return (
     <div className="vehicle-management">
-      <h2>Vehicle Management</h2>
-      <div className="form">
-        <input
-          type="text"
-          value={vehicleName}
-          onChange={(e) => setVehicleName(e.target.value)}
-          placeholder="Vehicle Name"
-        />
-
-        {/* Vehicle Type as a dropdown */}
-        <select
-          value={vehicleType}
-          onChange={(e) => setVehicleType(e.target.value)}
-        >
-          <option value="">Select Vehicle Type</option>
-          <option value="Sadan/Hatchback">Sadan/Hatchback</option>
-          <option value="SUV & 4 x 4 Vehicle">SUV & 4 x 4 Vehicle</option>
-          <option value="Luxury Vehicle">Luxury Vehicle</option>
-          <option value="Electric Vehicle">Electric Vehicle</option>
-        </select>
-
-        {/* Vehicle Brand as a dropdown */}
-        <select
-          value={vehicleBrand}
-          onChange={(e) => setVehicleBrand(e.target.value)}
-        >
-          <option value="">Select Vehicle Brand</option>
-          <option value="Toyota">Toyota</option>
-          <option value="Honda">Honda</option>
-          <option value="Suzuki">Suzuki</option>
-          <option value="Nissan">Nissan</option>
-        </select>
-
-        <input
-          type="text"
-          value={vehicleModel}
-          onChange={(e) => setVehicleModel(e.target.value)}
-          placeholder="Vehicle Model"
-        />
-
-        <input
-          type="text"
-          value={vehicleYear}
-          onChange={(e) => setVehicleYear(e.target.value)}
-          placeholder="Year of Manufacture"
-        />
-
-        {/* Transmission Dropdown */}
-        <select
-          value={transmission}
-          onChange={(e) => setTransmission(e.target.value)}
-        >
-          <option value="">Select Transmission</option>
-          <option value="Manual">Manual</option>
-          <option value="Automatic">Automatic</option>
-        </select>
-
-        <input
-          type="text"
-          value={engineCapacity}
-          onChange={(e) => setEngineCapacity(e.target.value)}
-          placeholder="Engine Capacity"
-        />
-
-        <input
-          type="text"
-          value={vehicleRegisterNumber}
-          onChange={(e) => setVehicleRegisterNumber(e.target.value)}
-          placeholder="Vehicle Registration Number"
-        />
-
-        <input
-          type="text"
-          value={mileage}
-          onChange={(e) => setMileage(e.target.value)}
-          placeholder="Mileage"
-        />
-
-        <input
-          type="text"
-          value={chassisNumber}
-          onChange={(e) => setChassisNumber(e.target.value)}
-          placeholder="Chassis Number"
-        />
-
-        <input
-          type="text"
-          value={madeCountry}
-          onChange={(e) => setMadeCountry(e.target.value)}
-          placeholder="Made Country"
-        />
-        
-        <button onClick={handleAddVehicle}>Add Vehicle</button>
+      <div className="vehicle-management-title">
+        <h2>Vehicle Management</h2>
       </div>
+      <div className="vehicle-main-wrapper">
+      <h3>Vehicle List</h3>
 
-      <div className="vehicle-list">
-        <h3>Vehicle List</h3>
-        {vehicleList.length === 0 ? (
-          <p>No vehicles added yet.</p>
-        ) : (
-          <table>
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Type</th>
-                <th>Brand</th>
-                <th>Model</th>
-                <th>Year</th>
-                <th>Transmission</th>
-                <th>Engine Capacity</th>
-                <th>Register Number</th>
-                <th>Mileage</th>
-                <th>Chassis</th>
-                <th>Country</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {vehicleList.map((vehicle, index) => (
-                <tr key={index}>
-                  <td>{vehicle.name}</td>
-                  <td>{vehicle.type}</td>
-                  <td>{vehicle.brand}</td>
-                  <td>{vehicle.model}</td>
-                  <td>{vehicle.year}</td>
-                  <td>{vehicle.transmission}</td>
-                  <td>{vehicle.engineCapacity}</td>
-                  <td>{vehicle.register}</td>
-                  <td>{vehicle.mileage}</td>
-                  <td>{vehicle.chassis}</td>
-                  <td>{vehicle.country}</td>
-                  <td>
-                    <button onClick={() => handleDeleteVehicle(index)}>Delete</button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        )}
+        <div className="vehicle-list">
+          {
+            vehicleList.map(vehicle =>
+              <CarInfoCard name={vehicle.name} number={vehicle.register} brand={vehicle.brand} />
+            )
+          }
+        </div>
+
+        <h3>Add a Vehicle</h3>
+        <div className="add-vehicle">
+          <div className="add-vehicle-left">
+            <div className="item-wrapper">
+              <label className="manage-vehicle-label"><b>Vehicle Name</b></label>
+              <input
+                type="text"
+                value={vehicleName}
+                onChange={(e) => setVehicleName(e.target.value)}
+                placeholder="Vehicle Name"
+                className="vehicle-management-input"
+              />
+            </div>
+
+            <div className="item-wrapper">
+              <label className="manage-vehicle-label"><b>Vehicle Name</b></label>
+              <select
+                value={vehicleType}
+                onChange={(e) => setVehicleType(e.target.value)}
+                className="vehicle-management-select"
+              >
+                <option value="">Select Vehicle Type</option>
+                <option value="Sadan/Hatchback">Sadan/Hatchback</option>
+                <option value="SUV & 4 x 4 Vehicle">SUV & 4 x 4 Vehicle</option>
+                <option value="Luxury Vehicle">Luxury Vehicle</option>
+                <option value="Electric Vehicle">Electric Vehicle</option>
+              </select>
+            </div>
+
+            <div className="item-wrapper">
+              <label className="manage-vehicle-label"><b>Vehicle Name</b></label>
+              <select
+                value={vehicleBrand}
+                onChange={(e) => setVehicleBrand(e.target.value)}
+                className="vehicle-management-select"
+              >
+                <option value="">Select Vehicle Brand</option>
+                <option value="Toyota">Toyota</option>
+                <option value="Honda">Honda</option>
+                <option value="Suzuki">Suzuki</option>
+                <option value="Nissan">Nissan</option>
+              </select>
+            </div>
+
+            <div className="item-wrapper">
+              <label className="manage-vehicle-label"><b>Vehicle Name</b></label>
+              <input
+                type="text"
+                value={vehicleModel}
+                onChange={(e) => setVehicleModel(e.target.value)}
+                placeholder="Vehicle Model"
+                className="vehicle-management-input"
+              />
+            </div>
+
+            <div className="item-wrapper">
+              <label className="manage-vehicle-label"><b>Vehicle Name</b></label>
+              <input
+                type="text"
+                value={vehicleYear}
+                onChange={(e) => setVehicleYear(e.target.value)}
+                placeholder="Year of Manufacture"
+                className="vehicle-management-input"
+              />
+            </div>
+
+            <div className="item-wrapper">
+              <label className="manage-vehicle-label"><b>Vehicle Name</b></label>
+              <select
+                value={transmission}
+                onChange={(e) => setTransmission(e.target.value)}
+                className="vehicle-management-select"
+              >
+                <option value="">Select Transmission</option>
+                <option value="Manual">Manual</option>
+                <option value="Automatic">Automatic</option>
+              </select>
+            </div>
+          </div>
+          <div className="add-vehicle-right">
+            <input
+              type="text"
+              value={engineCapacity}
+              onChange={(e) => setEngineCapacity(e.target.value)}
+              placeholder="Engine Capacity"
+              className="vehicle-management-input"
+            />
+
+            <input
+              type="text"
+              value={vehicleRegisterNumber}
+              onChange={(e) => setVehicleRegisterNumber(e.target.value)}
+              placeholder="Vehicle Registration Number"
+              className="vehicle-management-input"
+            />
+
+            <input
+              type="text"
+              value={mileage}
+              onChange={(e) => setMileage(e.target.value)}
+              placeholder="Mileage"
+              className="vehicle-management-input"
+            />
+
+            <input
+              type="text"
+              value={chassisNumber}
+              onChange={(e) => setChassisNumber(e.target.value)}
+              placeholder="Chassis Number"
+              className="vehicle-management-input"
+            />
+
+            <input
+              type="text"
+              value={madeCountry}
+              onChange={(e) => setMadeCountry(e.target.value)}
+              placeholder="Made Country"
+              className="vehicle-management-input"
+            />
+
+            <button onClick={handleAddVehicle}>Add Vehicle</button>
+          </div>
+
+        </div>
       </div>
     </div>
   );

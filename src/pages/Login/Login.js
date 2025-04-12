@@ -10,9 +10,8 @@ function Login() {
       console.log('logined with:', username, password);
     };
   return (
-    <div className="App">
-          <div className="login-container">
-      <h2>Login</h2>
+    <div className="login-container">
+      <h2 className='login-text'>Login</h2>
       <form onSubmit={handleSubmit} className="login-form">
         <div className="input-group">
           <label htmlFor="username">Username:</label>
@@ -34,9 +33,8 @@ function Login() {
             required
           />
         </div>
-        <button type="submit" className="login-btn">login</button>
+        <button type="submit" className="login-btn">Login</button>
       </form>
-    </div>
     </div>
   );
 }
