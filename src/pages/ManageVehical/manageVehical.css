@@ -1,0 +1,108 @@
+.vehicle-management {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f5f7fa;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .vehicle-management h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: space-between;
+    margin-bottom: 30px;
+  }
+  
+  .form input,
+  .form select {
+    flex: 1 1 45%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+    color: black; /* Text typed in input will be black */
+    background-color: white;
+  }
+  
+  .form input::placeholder {
+    color: #999;
+  }
+  
+  .form button {
+    flex: 1 1 100%;
+    padding: 12px;
+    background-color: #2e8b57;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .form button:hover {
+    background-color: #246b46;
+  }
+  
+  .vehicle-list h3 {
+    margin-bottom: 15px;
+    color: #444;
+  }
+  
+  .vehicle-list table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  }
+  
+  .vehicle-list th,
+  .vehicle-list td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+  }
+  
+  .vehicle-list th {
+    background-color: #2e8b57;
+    color: white;
+  }
+  
+  .vehicle-list tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .vehicle-list button {
+    padding: 6px 12px;
+    background-color: #c0392b;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .vehicle-list button:hover {
+    background-color: #a93226;
+  }
+  
+  @media (max-width: 768px) {
+    .form input,
+    .form select {
+      flex: 1 1 100%;
+    }
+  }
+  
+  

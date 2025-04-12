@@ -1,0 +1,77 @@
+/* Container for the register form */
+.register-container {
+  background-color: black;
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  width: 100%;
+  max-width: 400px; /* Set max width for the form */
+  text-align: center;
+}
+
+/* Form elements */
+.register-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-group {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+/* Labels */
+.input-group label {
+  color: white;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+/* Input fields */
+.input-group input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  width: 100%;
+  transition: border-color 0.3s ease;
+}
+
+.input-group input:focus {
+  border-color: #4bb662;
+  outline: none;
+}
+
+/* Full Name and Phone Number styling */
+.full-name,
+.phone-number {
+  background-color: #222;
+  color: white;
+}
+
+.full-name::placeholder,
+.phone-number::placeholder {
+  color: #888;
+}
+
+/* Submit button */
+.register-btn {
+  padding: 12px;
+  background-color: #4bb662;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.register-btn:hover {
+  background-color: #3e9450; /* Darker green on hover */
+}
+
+.register-btn:active {
+  background-color: #2f703a; /* Even darker green on button press */
+}

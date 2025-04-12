@@ -1,0 +1,42 @@
+
+/* Container for the login form */
+.login-container {
+  background-color: black;
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  width: 100%;
+  max-width: 400px; /* Set max width for the form */
+  text-align: center;
+}
+
+/* Form elements */
+.login-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-group {
+  margin-bottom: 20px;
+}
+
+
+/* Submit button */
+.login-btn {
+  padding: 12px;
+  background-color: #4bb662;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.login-btn:hover {
+  background-color: #617888; /* Darker green on hover */
+}
+
+.login-btn:active {
+  background-color: #7a7f86; /* Even darker green on button press */
+}

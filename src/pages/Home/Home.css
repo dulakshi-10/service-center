@@ -1,0 +1,28 @@
+.home-container {
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: white;
+  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7); /* Better shadow for visibility */
+  text-align: center; /* Center the text horizontally */
+}
+
+.home-container h2 {
+  font-size: 70px; /* Increase text size */
+  font-weight: bold; /* Make text bold */
+  background: linear-gradient(90deg, #ff416c, #ff4b2b); /* Gradient effect */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: fadeIn 2s ease-in-out;
+  padding: 10px 20px; /* Add padding to text */
+  letter-spacing: 2px; /* Add some spacing between letters */
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; transform: translateY(-20px);}
+  100% { opacity: 1; transform: translateY(0);}
+}
