@@ -15,27 +15,7 @@ const VehicleManagement = () => {
   const [madeCountry, setMadeCountry] = useState('');
   const [vehicleList, setVehicleList] = useState([{
     name: 'Ford Edge 2011', register: 'CAD - 22321', brand: 'Ford'
-  },{
-    name: 'Ford Edge 2011', register: 'CAD - 22321', brand: 'Ford'
-  },{
-    name: 'Ford Edge 2011', register: 'CAD - 22321', brand: 'Ford'
-  },{
-    name: 'Ford Edge 2011', register: 'CAD - 22321', brand: 'Ford'
-  },{
-    name: 'Ford Edge 2011', register: 'CAD - 22321', brand: 'Ford'
-  },{
-    name: 'Ford Edge 2011', register: 'CAD - 22321', brand: 'Ford'
-  },{
-    name: 'Ford Edge 2011', register: 'CAD - 22321', brand: 'Ford'
-  }, {
-    name: 'Ford Edge 2011', register: 'CAD - 22321', brand: 'Ford'
-  },{
-    name: 'Ford Edge 2011', register: 'CAD - 22321', brand: 'Ford'
-  },{
-    name: 'Ford Edge 2011', register: 'CAD - 22321', brand: 'Ford'
-  },{
-    name: 'Ford Edge 2011', register: 'CAD - 22321', brand: 'Ford'
-  } ]);
+  }]);
 
   const handleAddVehicle = () => {
     const newVehicle = {
@@ -91,18 +71,22 @@ const VehicleManagement = () => {
         <h2>Vehicle Management</h2>
       </div>
       <div className="vehicle-main-wrapper">
-      <h3>Vehicle List</h3>
+        <h3>Vehicle List</h3>
 
         <div className="vehicle-list">
           {
-            vehicleList.map(vehicle =>
-              <CarInfoCard name={vehicle.name} number={vehicle.register} brand={vehicle.brand} />
+            vehicleList.map((vehicle, index) =>
+              <div key={index}>
+                <CarInfoCard name={vehicle.name} number={vehicle.register} brand={vehicle.brand} />
+                <button onClick={() => handleDeleteVehicle(index)}>Delete</button>
+              </div>
             )
           }
         </div>
 
         <h3>Add a Vehicle</h3>
         <div className="add-vehicle">
+
           <div className="add-vehicle-left">
             <div className="item-wrapper">
               <label className="manage-vehicle-label"><b>Vehicle Name</b></label>
@@ -116,7 +100,7 @@ const VehicleManagement = () => {
             </div>
 
             <div className="item-wrapper">
-              <label className="manage-vehicle-label"><b>Vehicle Name</b></label>
+              <label className="manage-vehicle-label"><b>Vehicle Type</b></label>
               <select
                 value={vehicleType}
                 onChange={(e) => setVehicleType(e.target.value)}
@@ -131,7 +115,7 @@ const VehicleManagement = () => {
             </div>
 
             <div className="item-wrapper">
-              <label className="manage-vehicle-label"><b>Vehicle Name</b></label>
+              <label className="manage-vehicle-label"><b>Vehicle Brand</b></label>
               <select
                 value={vehicleBrand}
                 onChange={(e) => setVehicleBrand(e.target.value)}
@@ -142,11 +126,26 @@ const VehicleManagement = () => {
                 <option value="Honda">Honda</option>
                 <option value="Suzuki">Suzuki</option>
                 <option value="Nissan">Nissan</option>
+                <option value="Mitsubishi">Mitsubishi</option>
+                <option value="Mazda">Mazda</option>
+                <option value="Hyundai">Hyundai</option>
+                <option value="Kia">Kia</option>
+                <option value="Subaru">Subaru</option>
+                <option value="Isuzu">Isuzu</option>
+                <option value="Perodua">Perodua</option>
+                <option value="Proton">Proton</option>
+                <option value="BMW">BMW</option>
+                <option value="Mercedes-Benz">Mercedes-Benz</option>
+                <option value="Volkswagen">Volkswagen</option>
+                <option value="Tata">Tata</option>
+                <option value="Mahindra">Mahindra</option>
+                <option value="Chery">Chery</option>
+                <option value="Great Wall">Great Wall</option>
               </select>
             </div>
 
             <div className="item-wrapper">
-              <label className="manage-vehicle-label"><b>Vehicle Name</b></label>
+              <label className="manage-vehicle-label"><b>Vehicle Model</b></label>
               <input
                 type="text"
                 value={vehicleModel}
@@ -157,7 +156,7 @@ const VehicleManagement = () => {
             </div>
 
             <div className="item-wrapper">
-              <label className="manage-vehicle-label"><b>Vehicle Name</b></label>
+              <label className="manage-vehicle-label"><b>Vehicle Year</b></label>
               <input
                 type="text"
                 value={vehicleYear}
@@ -168,7 +167,7 @@ const VehicleManagement = () => {
             </div>
 
             <div className="item-wrapper">
-              <label className="manage-vehicle-label"><b>Vehicle Name</b></label>
+              <label className="manage-vehicle-label"><b>Select Transmission</b></label>
               <select
                 value={transmission}
                 onChange={(e) => setTransmission(e.target.value)}
@@ -180,50 +179,65 @@ const VehicleManagement = () => {
               </select>
             </div>
           </div>
+
           <div className="add-vehicle-right">
-            <input
-              type="text"
-              value={engineCapacity}
-              onChange={(e) => setEngineCapacity(e.target.value)}
-              placeholder="Engine Capacity"
-              className="vehicle-management-input"
-            />
+            <div className="item-wrapper">
+              <label className="manage-vehicle-label"><b>Engine Capacity</b></label>
+              <input
+                type="text"
+                value={engineCapacity}
+                onChange={(e) => setEngineCapacity(e.target.value)}
+                placeholder="Engine Capacity"
+                className="vehicle-management-input"
+              />
+            </div>
 
-            <input
-              type="text"
-              value={vehicleRegisterNumber}
-              onChange={(e) => setVehicleRegisterNumber(e.target.value)}
-              placeholder="Vehicle Registration Number"
-              className="vehicle-management-input"
-            />
+            <div className="item-wrapper">
+              <label className="manage-vehicle-label"><b>Vehicle Registration Number</b></label>
+              <input
+                type="text"
+                value={vehicleRegisterNumber}
+                onChange={(e) => setVehicleRegisterNumber(e.target.value)}
+                placeholder="Vehicle Registration Number"
+                className="vehicle-management-input"
+              />
+            </div>
 
-            <input
-              type="text"
-              value={mileage}
-              onChange={(e) => setMileage(e.target.value)}
-              placeholder="Mileage"
-              className="vehicle-management-input"
-            />
+            <div className="item-wrapper">
+              <label className="manage-vehicle-label"><b>Mileage</b></label>
+              <input
+                type="text"
+                value={mileage}
+                onChange={(e) => setMileage(e.target.value)}
+                placeholder="Mileage"
+                className="vehicle-management-input"
+              />
+            </div>
 
-            <input
-              type="text"
-              value={chassisNumber}
-              onChange={(e) => setChassisNumber(e.target.value)}
-              placeholder="Chassis Number"
-              className="vehicle-management-input"
-            />
+            <div className="item-wrapper">
+              <label className="manage-vehicle-label"><b>Chassis Number</b></label>
+              <input
+                type="text"
+                value={chassisNumber}
+                onChange={(e) => setChassisNumber(e.target.value)}
+                placeholder="Chassis Number"
+                className="vehicle-management-input"
+              />
+            </div>
 
-            <input
-              type="text"
-              value={madeCountry}
-              onChange={(e) => setMadeCountry(e.target.value)}
-              placeholder="Made Country"
-              className="vehicle-management-input"
-            />
+            <div className="item-wrapper">
+              <label className="manage-vehicle-label"><b>Made Country</b></label>
+              <input
+                type="text"
+                value={madeCountry}
+                onChange={(e) => setMadeCountry(e.target.value)}
+                placeholder="Made Country"
+                className="vehicle-management-input"
+              />
+            </div>
 
-            <button onClick={handleAddVehicle}>Add Vehicle</button>
+            <button type="submit" className="Add-btn">Add vehicle</button>
           </div>
-
         </div>
       </div>
     </div>

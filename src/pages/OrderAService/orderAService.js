@@ -1,66 +1,81 @@
 import React, { useState } from "react";
-import './OrderForm.css';  // Import the CSS file
+import './OrderForm.css';
 
 const OrderForm = () => {
-  const [selectedService, setSelectedService] = useState("");
+  const [selectedWashingService, setSelectedWashingService] = useState("");
+  const [selectedOilService, setSelectedOilService] = useState("");
+  const [selectedOtherService, setSelectedOtherService] = useState("");
+  const [additionalNote, setAdditionalNote] = useState("");
 
-  // Define grouped services
-  const serviceGroups = [
-    {
-      group: "Washing",
-      items: ["Full Washing", "Exterior Washing", "Interior Washing"],
-    },
-    {
-      group: "Oil Check",
-      items: ["Petrol Oil Check", "Diesel Oil Check"],
-    },
-  ];
-
-  // Define ungrouped services separately
-  const standaloneServices = ["Engine Check", "Gearbox & Brake Check"];
-
-  // Get today's date and current month in YYYY-MM format
   const today = new Date().toISOString().split("T")[0];
   const currentMonth = new Date().toISOString().slice(0, 7);
 
-  // Handle service click
-  const handleSelect = (service) => {
-    setSelectedService(service);
+  const handleWashingSelect = (service) => {
+    setSelectedWashingService(service);
+  };
+
+  const handleOilSelect = (service) => {
+    setSelectedOilService(service);
+  };
+
+  const handleOtherSelect = (service) => {
+    setSelectedOtherService(service);
+  };
+
+  const handleNoteChange = (e) => {
+    setAdditionalNote(e.target.value);
   };
 
   return (
     <div className="form-box">
-      <h2>Order Service</h2>
+      <center><h2>Order Service</h2></center>
 
-      {/* Custom service list */}
-      <p>Select a Service:</p>
+      {/* Washing Dropdown */}
+      <div className="item-wrapper">
+        <label className="manage-vehicle-label">
+          <b>Select Washing Type</b>
+        </label>
+        <select
+          value={selectedWashingService}
+          onChange={(e) => handleWashingSelect(e.target.value)}
+          className="vehicle-management-select"
+        >
+          <option value="">Select</option>
+          <option value="Full Washing">Full Washing</option>
+          <option value="Exterior Washing">Exterior Washing</option>
+          <option value="Interior Washing">Interior Washing</option>
+        </select>
+      </div>
 
-      {/* Display grouped services (Washing, Oil Check) */}
-      {serviceGroups.map((group) => (
-        <div key={group.group}>
-          <strong>{group.group}</strong>
-          <ul style={{ listStyle: "none", paddingLeft: 0 }}>
-            {group.items.map((item) => (
-              <li
-                key={item}
-                onClick={() => handleSelect(item)}
-                className={selectedService === item ? 'selected' : ''}
-              >
-                {item}
-              </li>
-            ))}
-          </ul>
-        </div>
-      ))}
+      {/* Oil Check Dropdown */}
+      <div className="item-wrapper" style={{ marginTop: "15px" }}>
+        <label className="manage-vehicle-label">
+          <b>Select Oil Check Type</b>
+        </label>
+        <select
+          value={selectedOilService}
+          onChange={(e) => handleOilSelect(e.target.value)}
+          className="vehicle-management-select"
+        >
+          <option value="">Select</option>
+          <option value="Petrol Oil Check">Petrol Oil Check</option>
+          <option value="Diesel Oil Check">Diesel Oil Check</option>
+        </select>
+      </div>
 
-      {/* Display ungrouped services separately */}
-      <div style={{ marginTop: "10px" }}>
+      {/* Other Services (as list) */}
+      <div style={{ marginTop: "15px" }}>
         <ul style={{ listStyle: "none", paddingLeft: 0 }}>
-          {standaloneServices.map((item) => (
+          {["Engine Check", "Gearbox & Brake Check"].map((item) => (
             <li
               key={item}
-              onClick={() => handleSelect(item)}
-              className={selectedService === item ? 'selected' : ''}
+              onClick={() => handleOtherSelect(item)}
+              className={selectedOtherService === item ? 'selected' : ''}
+              style={{
+                cursor: "pointer", 
+                marginBottom: "8px", 
+                fontWeight: ["Engine Check", "Gearbox & Brake Check"].includes(item) ? 'bold' : 'normal'
+              }}
             >
               {item}
             </li>
@@ -68,52 +83,52 @@ const OrderForm = () => {
         </ul>
       </div>
 
-      {/* Show date/time form only if a service is selected */}
-      {selectedService && (
+      {/* Show form if selected */}
+      {(selectedWashingService || selectedOilService || selectedOtherService) && (
         <>
-          <br />
-          <label>Date:</label>
-          <input
-            type="date"
-            min={today} // Restricts to today's date onwards
-            max={`${currentMonth}-31`} // Restricts to the current month (end of the month)
-          />
+          <br></br>
+          <div className="date-class">
+            <label><b>Date:</b></label>
+            <input
+              type="date"
+              min={today}
+              max={`${currentMonth}-31`}
+            />
+          </div>
+         
 
-          <label>Time:</label>
-          <input type="time" step="1" />
+          <div className="time-class">
+            <label><b>Time:</b></label>
+            <input type="time" step="1" />
+          </div>
 
-          <br />
+        <br></br>
 
-          <label htmlFor="note">Additional Note:</label>
-          <br />
-          <textarea
-            id="note"
-            rows="7"
-            cols="50"
-            placeholder="Any special requests..."
-          ></textarea>
-          <br />
-          <br />
-
-          <button>Submit Order</button>
-          <button style={{ marginLeft: "10px" }}>Cancel</button>
+          <div className="note-class">
+            <label htmlFor="note"><b>Additional Note:</b></label>
+            
+            <textarea
+              id="note"
+              rows="4"
+              cols="45"
+              placeholder="Any special requests..."
+              value={additionalNote}
+              onChange={handleNoteChange}
+            ></textarea>
+          </div>
+          
         </>
       )}
 
-      {/* Display dynamic messages based on selected service */}
-      {selectedService && (
-        <p className="selected-service-message">
-          {selectedService === "Engine Check" && "Engine will be inspected by a certified mechanic."}
-          {selectedService === "Petrol Oil Check" && "We will check and top up petrol engine oil."}
-          {selectedService === "Diesel Oil Check" && "We will check and top up diesel engine oil."}
-          {selectedService === "Gearbox & Brake Check" && "We will inspect the gearbox and brakes for any issues."}
-          {selectedService === "Full Washing" && "Full vehicle washing will be done, inside and out."}
-          {selectedService === "Exterior Washing" && "Exterior of the vehicle will be cleaned thoroughly."}
-          {selectedService === "Interior Washing" && "Interior cleaning will include vacuuming and wipe down."}
-        </p>
-      )}
+      <center>
+        <div className="button-wrapper">
+          <button className="submit-button"><b>Submit Order</b></button>
+          <button className="cancel-button"><b>Cancel</b></button>
+        </div>
+      </center>
     </div>
   );
 };
 
 export default OrderForm;
+

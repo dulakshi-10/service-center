@@ -59,6 +59,15 @@
     flex-wrap: wrap;
   }
 
+  .Add-btn {
+    padding: 12px;
+    background-color: #eab676;
+    border: none;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+  }
+
 
   /* Car card CSS */
   .car-card {

@@ -11,6 +11,9 @@ const Navbar = () => {
         <li><a href="/manageVehical">Manage Vehicle</a></li>
         <li><a href="/">Login</a></li>
         <li><a href="/register">Register</a></li>
+        <li><a href="/aboutUs">About Us</a></li>
+        <li><a href="/contactUs">ContactUs</a></li>
+     
       </ul>
     </nav>
   );

@@ -1,0 +1,12 @@
+.contact-container {
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .contact-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+  }
+  

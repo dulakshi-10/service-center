@@ -7,6 +7,10 @@ import Login from './pages/Login/Login';
 import OrderAService from './pages/OrderAService/orderAService';
 import NavbarComponent from './components/navbar/navbar';
 import ManageVehical from './pages/ManageVehical/manageVehical';
+import Aboutus from './pages/Aboutus/Aboutus';
+import ContactUs from './pages/ContactUs/ContactUs';
+
+
 import './App.css';  // CSS improt
 function App() {
   return (
@@ -20,6 +24,9 @@ function App() {
             <Route path="/" element={<Login />} />
             <Route path="/order" element={<OrderAService />} />
             <Route path="/manageVehical" element={<ManageVehical/>}/>
+            <Route path="/aboutUs" element={<Aboutus/>}/>
+            <Route path="/contactUs" element={<ContactUs/>}/>
+         
           </Routes>
         </div>
       </div>
