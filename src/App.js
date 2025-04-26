@@ -11,6 +11,8 @@ import Aboutus from './pages/Aboutus/Aboutus';
 import ContactUs from './pages/ContactUs/ContactUs';
 
 
+
+      
 import './App.css';  // CSS improt
 function App() {
   return (
@@ -26,6 +28,9 @@ function App() {
             <Route path="/manageVehical" element={<ManageVehical/>}/>
             <Route path="/aboutUs" element={<Aboutus/>}/>
             <Route path="/contactUs" element={<ContactUs/>}/>
+           
+        
+      
          
           </Routes>
         </div>

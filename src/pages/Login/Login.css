@@ -1,4 +1,3 @@
-
 /* Container for the login form */
 .login-container {
   background-color: rgb(255, 255, 255);
@@ -22,13 +21,18 @@
   margin-bottom: 20px;
 }
 
-
-/* Submit button */
-.login-btn {
+/* Button styles */
+.login-btn, .new-user-btn {
   padding: 12px;
   background-color: #eab676;
   border: none;
   color: white;
   font-size: 18px;
   cursor: pointer;
+  margin: 10px 0; /* Space between buttons */
+}
+
+/* Optional: Add hover effect for buttons */
+.login-btn:hover, .new-user-btn:hover {
+  background-color: #c89758; /* Darker shade for hover effect */
 }
