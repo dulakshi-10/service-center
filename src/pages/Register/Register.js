@@ -1,26 +1,63 @@
 import React, { useState } from 'react';
 import './Register.css';  // Importing CSS file
+import { useNavigate } from 'react-router-dom';
 
 function Register() {
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [fullName, setFullName] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log("check", fullName, email, phoneNumber, password)
+
+    // Check if any field is empty
+    if (!fullName || !email || !phoneNumber || !password || !confirmPassword) {
+      alert("All fields are required!");
+      return;
+    }
 
     if (password !== confirmPassword) {
       alert("Passwords do not match!");
       return;
     }
 
-    console.log('Registered with:', { fullName, email, phoneNumber, password });
+    // Create the request payload
+    const requestBody = {
+      name: fullName,
+      email,
+      telephone: phoneNumber,
+      password,
+    };
+    try {
+      // Send the POST request to the backend
+      const response = await fetch('/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(requestBody),
+      });
+
+      // Handle response from the backend
+      if (response.ok) {
+        const data = await response.json();
+        navigate('/login');
+        
+      } else {
+        const errorData = await response.json();
+        alert(`Error: ${errorData.message || 'Something went wrong'}`);
+      }
+    } catch (error) {
+      alert('Error during registration. Please try again later.');
+    }
   };
 
   return (
-    <div className="App">
+    <div className="outer-container">
       <div className="register-container">
         <h2>Register</h2>
         <form onSubmit={handleSubmit} className="register-form">

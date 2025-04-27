@@ -1,32 +1,43 @@
 /* Navbar.css */
 .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #ffffff;
-    padding: 15px 10px 15px 10px;
-  }
-  
-  .navbar-logo {
-    font-size: 1.8rem;
-    font-weight: bold;
-    color: #2c3e50;
-    letter-spacing: 1px;
-  }
-  
-  .navbar-links {
-    list-style: none;
-    display: flex;
-    gap: 60px;
-    margin: 0;
-    padding: 0;
-  }
-  
-  .navbar-links li a {
-    text-decoration: none;
-    color: #2c3e50;
-    font-weight: 500;
-    font-size: 1rem;
-    position: relative;
-  }
-  
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ffffff;
+  padding: 10px;
+  position: sticky; /* 🔥 make it sticky */
+  top: 0;            /* 🔥 stick to the top */
+  z-index: 1000;     /* 🔥 stay on top of other elements */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* optional nice shadow */
+}
+
+.navbar-links {
+  list-style: none;
+  display: flex;
+  gap: 60px;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-links li a {
+  text-decoration: none;
+  color: #ffffff;
+  font-weight: 500;
+  font-size: 1.2rem;
+  position: relative;
+  background-color: rgb(249, 202, 62);
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.logo-image {
+  height: 100px; /* Adjust the size as you like */
+  width: auto;
+}
+
+.name {
+  font-size: 50px;
+  font-weight: bold;
+  padding: 0px;
+  margin: 0px;
+}

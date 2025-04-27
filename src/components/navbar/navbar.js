@@ -1,19 +1,21 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 import './navbar.css';
 
 const Navbar = () => {
+  const location = useLocation(); // 👈 get current route
+
   return (
     <nav className="navbar">
-      <div className="navbar-logo">Sachith Service Center</div>
+      <div className="navbar-logo">
+        <img src="/images/logo.png" alt="Sachith Service Center Logo" className="logo-image" />
+      </div>
+      <p className="name">SACHITH SERVICE CENTER</p>
       <ul className="navbar-links">
-        <li><a href="/home">Home</a></li>
-        <li><a href="/order">Order a Service</a></li>
-        <li><a href="/manageVehical">Manage Vehicle</a></li>
-        <li><a href="/">Login</a></li>
-        <li><a href="/register">Register</a></li>
-        <li><a href="/aboutUs">About Us</a></li>
-        <li><a href="/contactUs">ContactUs</a></li>
-     
+        {/* Only show login button if not on /dashboard */}
+        {!location.pathname.startsWith('/dashboard') && (
+          <li><a href="/login" className="login-button">Login</a></li>
+        )}
       </ul>
     </nav>
   );

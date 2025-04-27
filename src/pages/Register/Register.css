@@ -1,4 +1,13 @@
 /* Container for the register form */
+.outer-container {
+  display: flex;
+  height: calc(100vh - 120px);
+  justify-content: center;
+  width: 100%;
+
+  align-items: center;
+}
+
 .register-container {
   background-color: rgb(255, 255, 255);;
   padding: 80px;
@@ -43,7 +52,7 @@
 /* Submit button */
 .register-btn {
   padding: 15px;
-  background-color: #eab676;
+  background-color: #ffdf01;
   border: none;
   color: white;
   font-size: 16px;
@@ -52,6 +61,6 @@
 }
 
 .register-btn:hover {
-  background-color:#eab676; /* Darker green on hover */
+  background-color:#ffdf01; /* Darker green on hover */
 }
 

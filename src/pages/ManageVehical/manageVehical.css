@@ -11,7 +11,7 @@
 
   .vehicle-management-title {
     display: flex;
-    background-color: #eab676;
+    background-color: #ffdf01;
     padding-left: 10px;
   }
 
@@ -61,7 +61,7 @@
 
   .Add-btn {
     padding: 12px;
-    background-color: #eab676;
+    background-color: #ffdf01;
     border: none;
     color: white;
     font-size: 18px;
