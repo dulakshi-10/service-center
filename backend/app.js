@@ -103,7 +103,6 @@ app.post('/create-order', (req, res) => {
         isAdvancePaid
     } = req.body;
 
-    console.log("isAdvancePaid", req)
 
     // Validate required fields
     if (!userId || !vehicleId || !orderDate || !orderTime || !email) {
@@ -173,6 +172,95 @@ app.post('/create-order', (req, res) => {
         }
     );
 });
+
+app.post('/vehicles/add', (req, res) => {
+    const {
+        userId,
+        vehicle_name,
+        vehicle_type,
+        vehicle_brand,
+        vehicle_model,
+        vehicle_year,
+        transmission,
+        engine_capacity,
+        registration_number,
+        mileage,
+        chassis_number,
+        made_country
+    } = req.body;
+
+    if (!userId || !vehicle_name || !registration_number) {
+        return res.status(400).json({ message: 'Missing required fields' });
+    }
+
+    const query = `
+        INSERT INTO vehicles (
+            user_id, vehicle_name, vehicle_type, vehicle_brand, vehicle_model,
+            vehicle_year, transmission, engine_capacity, registration_number,
+            mileage, chassis_number, made_country
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    `;
+
+    db.query(
+        query,
+        [
+            userId, vehicle_name, vehicle_type, vehicle_brand, vehicle_model,
+            vehicle_year, transmission, engine_capacity, registration_number,
+            mileage, chassis_number, made_country
+        ],
+        (err, result) => {
+            if (err) {
+                console.error('Error adding vehicle:', err);
+                return res.status(500).json({ message: 'Failed to add vehicle' });
+            }
+            const query = 'SELECT * FROM vehicles WHERE user_id = ?';
+            db.query(query, [userId], (err, results) => {
+                if (err) return res.status(500).json({ message: 'Error fetching vehicles' });
+
+                res.json(results);
+            });
+        }
+    );
+});
+
+
+app.post('/vehicles/delete', (req, res) => {
+    const { vehicleId, userId } = req.body;  // Get the vehicleId from the body
+  
+    const query = 'DELETE FROM vehicles WHERE id = ?';
+  
+    db.query(query, [vehicleId], (err, result) => {
+      if (err) {
+        console.error('Error deleting vehicle:', err);
+        return res.status(500).json({ message: 'Failed to delete vehicle' });
+      }
+  
+      if (result.affectedRows === 0) {
+        return res.status(404).json({ message: 'Vehicle not found' });
+      }
+  
+      const query = 'SELECT * FROM vehicles WHERE user_id = ?';
+      db.query(query, [userId], (err, results) => {
+        if (err) return res.status(500).json({ message: 'Error fetching vehicles' });
+  
+        res.json(results);  // Send the updated vehicle list after deletion
+      });
+    });
+  });
+  
+
+app.post('/vehicles/my', async (req, res) => {
+    const {
+        userId,
+    } = req.body;
+    const query = 'SELECT * FROM vehicles WHERE user_id = ?';
+  db.query(query, [userId], (err, results) => {
+    if (err) return res.status(500).json({ message: 'Error fetching vehicles' });
+
+    res.json(results);
+  });
+});
+
 
 // Start the backend server
 const PORT = 5000;

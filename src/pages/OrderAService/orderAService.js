@@ -52,7 +52,6 @@ const OrderService = () => {
 
   const onOrderSubmit = async (e) => {
     e.preventDefault();
-    console.log("user", user)
     const requestBody = {
       "userId": user.id,
       "vehicleId": selectedVehicleNumber,

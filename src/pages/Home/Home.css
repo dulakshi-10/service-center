@@ -27,9 +27,9 @@
   transform: translate(-50%, -50%);
   background-color: rgba(0, 0, 0, 0.75);
   color: #ffffff;
-  padding: 10px 100px; /* Increased padding for more space */
+  padding: 10px; /* Increased padding for more space */
   border-radius: 10px;
-  width: 1000px; /* Set a fixed width to make the box larger */
+  width: 100%; /* Set a fixed width to make the box larger */
   text-align: left;
   box-shadow: 0 8px 20px rgba(167, 162, 162, 0.7);
   font-family: 'Segoe UI', sans-serif;

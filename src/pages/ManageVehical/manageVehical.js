@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import './manageVehical.css';  // Correct import path
+import { useUser } from '../../context/UserContext';
 
 const VehicleManagement = () => {
   const [vehicleName, setVehicleName] = useState('');
@@ -16,30 +17,136 @@ const VehicleManagement = () => {
   const [vehicleList, setVehicleList] = useState([{
     name: 'Ford Edge 2011', register: 'CAD - 22321', brand: 'Ford'
   }]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const { user } = useUser();
+
+  useEffect(() => {
+    const token = localStorage.getItem('authToken');
+
+    if (!token) {
+      setError('No auth token found');
+      setLoading(false);
+      return;
+    }
+    const requestBody = {
+      "userId": user.id,
+    }
+    fetch('http://localhost:3000/vehicles/my', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(requestBody),
+    })
+    .then(res => {
+      if (!res.ok) {
+        throw new Error('Failed to fetch vehicles');
+      }
+      return res.json();
+    })
+    .then(data => {
+      setVehicleList(data);
+      setLoading(false);
+    })
+    .catch(err => {
+      setError(err.message);
+      setLoading(false);
+    });
+  }, []);
 
   const handleAddVehicle = () => {
+    setLoading(true);  // Set loading to true when the request starts
     const newVehicle = {
-      name: vehicleName,
-      type: vehicleType,
-      brand: vehicleBrand,
-      model: vehicleModel,
-      year: vehicleYear,
+      vehicle_name: vehicleName,
+      vehicle_type: vehicleType,
+      vehicle_brand: vehicleBrand,
+      vehicle_model: vehicleModel,
+      vehicle_year: vehicleYear,
       transmission: transmission,
-      engineCapacity: engineCapacity,
-      register: vehicleRegisterNumber,
+      engine_capacity: engineCapacity,
+      registration_number: vehicleRegisterNumber,
       mileage: mileage,
-      chassis: chassisNumber,
-      country: madeCountry,
+      chassis_number: chassisNumber,
+      made_country: madeCountry,
+      userId: user.id,
     };
-
-    setVehicleList([...vehicleList, newVehicle]);
-    clearForm();
+  
+    const token = localStorage.getItem('authToken');
+  
+    if (!token) {
+      setError('No auth token found');
+      setLoading(false);  // Set loading to false if no token is found
+      return;
+    }
+  
+    fetch('http://localhost:3000/vehicles/add', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(newVehicle),
+    })
+      .then(res => {
+        if (!res.ok) {
+          throw new Error('Failed to add vehicle');
+        }
+        return res.json();
+      })
+      .then(data => {
+        setVehicleList(data);  // Optionally add the new vehicle to the existing list
+        setLoading(false);  // Set loading to false after the request finishes
+      })
+      .catch(err => {
+        setError(err.message);  // Set the error message if any error occurs
+        setLoading(false);  // Set loading to false in case of error
+      });
+  
+    clearForm();  // Clear the form after submitting
   };
 
-  const handleDeleteVehicle = (index) => {
-    const updatedList = vehicleList.filter((_, i) => i !== index);
-    setVehicleList(updatedList);
+  const handleDeleteVehicle = (vehicleId) => {
+    setLoading(true);  // Set loading to true when the request starts
+  
+    const token = localStorage.getItem('authToken');
+  
+    if (!token) {
+      setError('No auth token found');
+      setLoading(false);  // Set loading to false if no token is found
+      return;
+    }
+    const deleteVehicle = {
+      vehicleId: vehicleId,
+      userId: user.id,
+    };
+    fetch('http://localhost:3000/vehicles/delete', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(deleteVehicle),  // Send vehicleId in the body
+    })
+      .then(res => {
+        if (!res.ok) {
+          throw new Error('Failed to delete vehicle');
+        }
+        return res.json();
+      })
+      .then(data => {
+        // Optionally remove the deleted vehicle from the list
+        setVehicleList(data);
+        setLoading(false);  // Set loading to false after the request finishes
+      })
+      .catch(err => {
+        setError(err.message);  // Set the error message if any error occurs
+        setLoading(false);  // Set loading to false in case of error
+      });
   };
+  
+  
 
   const clearForm = () => {
     setVehicleName('');
@@ -55,16 +162,18 @@ const VehicleManagement = () => {
     setMadeCountry('');
   };
 
-  const CarInfoCard = ({ name, number, brand }) => {
+  const CarInfoCard = ({ name, number, brand, id }) => {
     return (
       <div className="car-card">
         <h3 className="car-card-title">{name}</h3>
         <p><strong>Number:</strong> {number}</p>
         <p><strong>Brand:</strong> {brand}</p>
+        <button onClick={() => handleDeleteVehicle(id)}>Delete</button>
       </div>
     );
   };
-
+  if (loading) return <p>Loading vehicles...</p>;
+  if (error) return <p>Error: {error}</p>;
   return (
     <div className="vehicle-management">
       <div className="vehicle-management-title">
@@ -77,8 +186,7 @@ const VehicleManagement = () => {
           {
             vehicleList.map((vehicle, index) =>
               <div key={index}>
-                <CarInfoCard name={vehicle.name} number={vehicle.register} brand={vehicle.brand} />
-                <button onClick={() => handleDeleteVehicle(index)}>Delete</button>
+                <CarInfoCard name={vehicle.vehicle_name} id={vehicle.id} number={vehicle.registration_number} brand={vehicle.vehicle_brand}/>
               </div>
             )
           }
@@ -236,7 +344,7 @@ const VehicleManagement = () => {
               />
             </div>
 
-            <button type="submit" className="Add-btn">Add vehicle</button>
+            <button type="submit" className="Add-btn" onClick={handleAddVehicle}>Add vehicle</button>
           </div>
         </div>
       </div>

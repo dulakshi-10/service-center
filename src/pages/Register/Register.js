@@ -12,7 +12,6 @@ function Register() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("check", fullName, email, phoneNumber, password)
 
     // Check if any field is empty
     if (!fullName || !email || !phoneNumber || !password || !confirmPassword) {
