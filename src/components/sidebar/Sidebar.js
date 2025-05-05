@@ -7,8 +7,9 @@ const Sidebar = () => {
     <div className='sidebar'>
       <h3>Menu</h3>
       <ul>
-        <li><Link to="order">Order a Service</Link></li>
+        <li><Link to="order"> Service</Link></li>
         <li><Link to="manage-vehicle">Manage Vehicle</Link></li>
+   
       </ul>
     </div>
   );

@@ -1,47 +1,91 @@
 /* Container for the login form */
 .outer-container {
   display: flex;
-  height: calc(100vh - 120px);
+  height: 100vh;
   justify-content: center;
   align-items: center;
   width: 100%;
+  background-color: #f0f4f8; /* Light pastel blue-gray for soft feel */
 }
 
+/* Login container with soft rounded corners and shadow */
 .login-container {
-  background-color: rgb(255, 255, 255);
+  background-color: #ffffff; /* White background */
   padding: 40px;
-  width: 500px; /* Set max width for the form */
+  width: 450px; /* Adjust the width */
   text-align: center;
-  align-self: center;
+  border-radius: 16px; /* Rounded corners */
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+  overflow: hidden; /* Prevent anything from sticking out */
 }
 
+/* Main text (Heading) */
 .login-text {
-  font-size: xx-large;
-  margin: 0px;
+  font-size: 50px;
+  font-weight: 700; /* Bold and modern text */
+  color: #3b3f47; /* Dark grayish-blue for a sleek, professional look */
+  margin-bottom: 30px; /* Space between title and form */
+  font-family: 'Poppins', sans-serif; /* Stylish font */
 }
 
 /* Form elements */
 .login-form {
   display: flex;
   flex-direction: column;
+  gap: 16px; /* Reduced space between elements */
 }
 
+/* Input field styles */
 .input-group {
-  margin-bottom: 20px;
+  width: 100%;
+  margin-bottom: 10px; /* Reduced margin bottom for tighter layout */
+  font-size: 30px;
+}
+
+input[type="text"], input[type="password"] {
+  width: 100%;
+  padding: 14px;
+  font-size: 20px;
+  border: 2px solid #d1d5db; /* Soft border */
+  border-radius: 8px; /* Adjusted rounded border */
+  background-color: #fafbfc; /* Very light blue-gray for soft background */
+  color: #333333; /* Dark text for readability */
+  transition: all 0.3s ease;
+  margin: 0; /* Remove extra margin */
+}
+
+/* Input focus effect */
+input[type="text"]:focus, input[type="password"]:focus {
+  border-color: #4e6c94; /* Soft blue-gray border on focus */
+  background-color: #ffffff; /* White background when focused */
+  outline: none;
 }
 
 /* Button styles */
 .login-btn, .new-user-btn {
-  padding: 12px;
-  background-color: #ffdf01;
+  padding: 14px;
+  background-color: #5c6bc0; /* Soft purple-blue for primary button */
   border: none;
   color: white;
-  font-size: 18px;
+  font-size: 25px;
   cursor: pointer;
-  margin: 10px 0; /* Space between buttons */
+  border-radius: 8px; /* Rounded button corners */
+  margin: 12px 0; /* Space between buttons */
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1); /* Slight shadow for depth */
 }
 
-/* Optional: Add hover effect for buttons */
+/* Hover effect for buttons */
 .login-btn:hover, .new-user-btn:hover {
-  background-color: #c89758; /* Darker shade for hover effect */
+  background-color: #3f51b5; /* Darker blue on hover */
+  transform: translateY(-4px); /* Lift effect on hover */
+}
+
+/* Optional: Link styles for new user button */
+.new-user-btn {
+  background-color: #81c784; /* Light green for secondary button */
+}
+
+.new-user-btn:hover {
+  background-color: #66bb6a; /* Darker green on hover */
 }

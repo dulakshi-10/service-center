@@ -1,99 +1,118 @@
 .vehicle-management {
-    width:90%;
-    height: 80%;
-    background-color: white;
-    margin: 50px;
-    padding: 50px;
-    display: flex;
-    flex-direction: column;
-    overflow-y: scroll;
-  }
+  width: 90%;
+  max-width: 1200px;
+  margin: 50px auto;
+  padding: 40px;
+  background-color: #fefefe;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  font-size: 20px;
+  font-family: 'Segoe UI', sans-serif;
+  overflow: hidden;
+}
 
-  .vehicle-management-title {
-    display: flex;
-    background-color: #ffdf01;
-    padding-left: 10px;
-  }
+.vehicle-management-title {
+  background: linear-gradient(90deg, #6b8692, #4a6572);
+  color: white;
+  padding: 15px 20px;
+  font-size: 28px;
+  font-weight: bold;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+}
 
-  .vehicle-main-wrapper {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .add-vehicle {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-  }
+.vehicle-main-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
 
-  .add-vehicle-left {
-    display: flex;
-    flex-direction: column;
-  }
+.add-vehicle {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  justify-content: space-between;
+}
 
-  .add-vehicle-right {
-    display: flex;
-    flex-direction: column;
-  }
+.add-vehicle-left,
+.add-vehicle-right {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  flex: 1;
+  min-width: 280px;
+}
 
-  .vehicle-management-input,
-  .vehicle-management-select {
-    width: 100%;
-    width: 400px;
-    padding: 10px 14px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    background-color: #f9f9f9;
-    box-sizing: border-box;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
-  }
+.vehicle-management-input,
+.vehicle-management-select {
+  width: 100%;
+  padding: 14px 18px;
+  font-size: 18px;
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
 
-  .item-wrapper {
-    margin-top: 10px;
-    margin-bottom: 1%;
-  }
+.vehicle-management-input:focus,
+.vehicle-management-select:focus {
+  border-color: #4a90e2;
+  box-shadow: 0 0 5px rgba(74, 144, 226, 0.5);
+  outline: none;
+}
 
-  .vehicle-list {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-  }
+.Add-btn {
+  padding: 14px 24px;
+  background-color: #4caf50;
+  color: white;
+  font-size: 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  align-self: flex-start;
+  transition: background-color 0.3s ease;
+}
 
-  .Add-btn {
-    padding: 12px;
-    background-color: #ffdf01;
-    border: none;
-    color: white;
-    font-size: 18px;
-    cursor: pointer;
-  }
+.Add-btn:hover {
+  background-color: #43a047;
+}
 
+.vehicle-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: flex-start;
+}
 
-  /* Car card CSS */
-  .car-card {
-    width: 100%;
-    max-width: 220px;
-    padding: 16px 20px;
-    border: 1px solid #e0e0e0;
-    background-color: #ededed;
-    transition: transform 0.2s ease;
-    margin: 10px;
-  }
-  
-  .car-card:hover {
-    transform: translateY(-2px);
-  }
-  
-  .car-card-title {
-    margin: 0 0 10px;
-    font-size: 18px;
-    font-weight: 600;
-    color: #333;
-  }
-  
-  .car-card p {
-    margin: 4px 0;
-    font-size: 14px;
-    color: #555;
-  }
-  
+/* Card Style */
+.car-card {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  width: calc(33.33% - 20px);
+  min-width: 260px;
+}
+
+.car-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.car-card-title {
+  font-size: 22px;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 10px;
+}
+
+.car-card p {
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 6px;
+}

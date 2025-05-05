@@ -1,8 +1,7 @@
-
-
 .form-box {
-  padding: 10px;
+  padding: 100px;
   background-color: #f9f9f9;
+  font-size: 25px; /* Larger font size for everything inside .form-box */
 }
 
 /* Button wrapper for layout */
@@ -15,20 +14,39 @@
 
 .item-wrapper {
   display: flex;
-  width: 60%;
+  flex-wrap: wrap;
+  width: 80%;
   justify-content: space-between;
   align-items: center;
+  gap: 20px;
 }
+
+.item-wrapper > * {
+  flex: 1 1 45%;
+  min-width: 200px;
+}
+
 /* Base button styling */
 .submit-button, .cancel-button {
-  padding: 10px 20px;
-  font-size: 16px;
+  padding: 12px 24px; /* Larger padding for buttons */
+  font-size: 20px; /* Larger font size for button text */
   cursor: pointer;
   border: none;
   border-radius: 5px;
-  transition: background-color 0.3s ease;
-  background-color: #ffdf01; /* Button background color */
-  color: black;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  background-color: #3498db; /* New button background color (blue) */
+  color: white; /* White text for contrast */
+}
+
+/* Hover effect to make the button more interactive */
+.submit-button:hover, .cancel-button:hover {
+  background-color: #2980b9; /* Slightly darker blue on hover */
+  transform: scale(1.05); /* Slight grow effect on hover */
+}
+
+/* Optional: Adding a shadow effect */
+.submit-button, .cancel-button {
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow */
 }
 
 .date-class, .time-class {
@@ -36,16 +54,16 @@
 }
 
 .date-class label, .time-class label {
-  font-size: 15px; /* Larger font for labels */
+  font-size: 25px; /* Larger font size for labels */
   font-weight: bold;
   display: block;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 }
 
 .date-class input, .time-class input {
   width: 80%;
-  padding: 12px;
-  font-size: 18px; /* Larger font for inputs */
+  padding: 14px; /* Larger padding for inputs */
+  font-size: 25px; /* Larger font size for inputs */
   border: 1px solid #ccc;
   border-radius: 6px;
 }
@@ -53,3 +71,80 @@
 .date-class input[type="date"], .time-class input[type="time"] {
   margin-top: 5px;
 }
+/* Styling for the Payment Details section */
+.credit-card-section {
+  margin-top: 30px;
+  padding: 25px;
+  background: linear-gradient(145deg, #e9f0f5, #ffffff); /* Soft blue gradient background */
+  border-radius: 12px; /* Rounded corners for a softer look */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+}
+
+/* Styling for the header inside the section */
+.credit-card-section h3 {
+  font-size: 26px;
+  font-weight: bold;
+  color: #2c3e50; /* Dark gray-blue for the heading */
+  margin-bottom: 20px;
+  text-align: center; /* Centered heading */
+  letter-spacing: 1px; /* Adds letter-spacing for a cleaner look */
+}
+
+/* Styling for the input field wrapper */
+.item-wrapper {
+  margin-bottom: 25px; /* Increased spacing between fields */
+}
+
+/* Styling for the credit card number input */
+.vehicle-management-input {
+  width: 100%;
+  padding: 15px;
+  font-size: 25px;
+  border-radius: 10px; /* Softer rounded corners */
+  border: 1px solid #ddd; /* Light gray border for a clean look */
+  background-color: #ffffff;
+  color: #34495e;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+  margin-top: 5px;
+}
+
+/* Focus effect for the input field */
+.vehicle-management-input:focus {
+  border-color: #3498db; /* Blue border when focused */
+  box-shadow: 0 0 10px rgba(52, 152, 219, 0.5); /* Soft blue glow on focus */
+  outline: none;
+  transform: scale(1.02); /* Slight scale effect on focus */
+}
+
+/* Styling for the labels */
+.credit-card-section label {
+  font-size: 25px;
+  font-weight: bold;
+  color: #34495e; /* Dark gray for labels */
+  margin-bottom: 12px;
+  display: block;
+}
+
+/* Button Styling (submit order button) */
+.submit-button {
+  padding: 10px 20px;  /* Smaller padding */
+  font-size: 25px;     /* Smaller font size */
+  background-color: #3498db;  /* Blue background */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  margin-top: 20px;
+  width: auto; /* Auto width to adjust to content size */
+  display: block; /* Make the button block level */
+  margin-left: auto; /* Center it horizontally */
+  margin-right: auto; /* Center it horizontally */
+}
+
+/* Button hover effect */
+.submit-button:hover {
+  background-color: #2980b9; /* Darker blue on hover */
+  transform: scale(1.05); /* Slight grow effect on hover */
+}
+

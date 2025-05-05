@@ -1,34 +1,64 @@
+/* Sidebar Styling */
 .sidebar {
-  width: 250px;
+  width: 350px; /* Increased sidebar width */
   height: 100%;
-  background-color: #141313; /* Background color for the sidebar */
+  background-color: #1f2937; /* Dark background */
   color: white;
-  padding: 20px;
+  padding: 40px; /* More padding for spacing */
   display: flex;
   flex-direction: column;
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for better distinction */
+  box-shadow: 3px 0 15px rgba(0, 0, 0, 0.3); /* More subtle shadow */
+  font-family: 'Arial', sans-serif;
+  border-right: 5px solid #3b82f6; /* Strong accent color for border */
+  text-align: center; /* Center content horizontally */
 }
 
+/* Sidebar header styling */
 .sidebar h3 {
   margin-top: 0;
-  font-size: 24px;
+  font-size: 40px; /* Larger font for the title */
+  font-weight: bold;
+  color: #60a5fa; /* Light blue accent */
+  margin-bottom: 40px; /* More spacing below the header */
+  text-align: center; /* Center align the header text */
 }
 
+/* Sidebar list styling */
 .sidebar ul {
   list-style-type: none;
   padding: 0;
+  margin-top: 10px;
 }
 
+/* Sidebar list items styling */
 .sidebar ul li {
-  margin: 20px 0;
+  margin: 20px 0; /* Larger margin between items */
 }
 
+/* Sidebar links styling */
 .sidebar ul li a {
   color: white;
   text-decoration: none;
-  font-size: 18px;
+  font-size: 26px; /* Larger font size for links */
+  padding: 15px 20px; /* Increased padding */
+  border-radius: 8px; /* Rounded corners for the links */
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth hover effect */
+  display: block; /* Make the link take full width for easier clicking */
+  margin: 5px 0; /* Slight margin to create space between the links */
 }
 
+/* Hover effect for sidebar links */
 .sidebar ul li a:hover {
-  text-decoration: underline;
+  background-color: #3b82f6; /* Blue background on hover */
+  color: white;
+  transform: translateX(10px); /* Slide effect */
+  text-decoration: none;
 }
+
+/* Active state for the links */
+.sidebar ul li a.active {
+  background-color: #60a5fa; /* Active link background color */
+  font-weight: bold;
+}
+
+

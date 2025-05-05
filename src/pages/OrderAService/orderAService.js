@@ -168,7 +168,13 @@ const OrderService = () => {
           <label className="manage-vehicle-label">
             <b>Select Additional Services</b>
           </label>
-          <div style={{ display: "flex", flexWrap: "wrap", gap: "15px", justifyContent: "flex-end" }}>
+          <div style={{
+  display: "flex",
+  flexDirection: "column",
+  gap: "20px",
+  alignItems: "flex-start" // or "center" or "stretch" as needed
+}}>
+
             {[
               "Tire Rotation",
               "Brake Inspection",

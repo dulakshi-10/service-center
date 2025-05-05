@@ -1,43 +1,44 @@
-/* Navbar.css */
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #ffffff;
-  padding: 10px;
-  position: sticky; /* 🔥 make it sticky */
-  top: 0;            /* 🔥 stick to the top */
-  z-index: 1000;     /* 🔥 stay on top of other elements */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* optional nice shadow */
-}
-
-.navbar-links {
-  list-style: none;
-  display: flex;
-  gap: 60px;
-  margin: 0;
-  padding: 0;
+  background-color: #1e3a8a; /* Navy Blue */
+  padding: 10px 30px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .navbar-links li a {
   text-decoration: none;
-  color: #ffffff;
-  font-weight: 500;
-  font-size: 1.2rem;
-  position: relative;
-  background-color: rgb(249, 202, 62);
-  padding: 10px;
-  border-radius: 10px;
+  color: #ffffff; /* White text for readability */
+  font-weight: bold;
+  font-size: 1.1rem;
+  background: linear-gradient(135deg, #3b82f6, #60a5fa); /* Blue Gradient */
+  padding: 12px 24px;
+  border-radius: 14px;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
 
+.navbar-links li a:hover {
+  background: linear-gradient(135deg, #f59e0b, #fbbf24); /* Gold/Orange hover */
+  transform: scale(1.07);
+  color: #1e3a8a; /* Dark blue text on hover */
+}
+
+/* Logo styles */
 .logo-image {
-  height: 100px; /* Adjust the size as you like */
+  height: 80px;
   width: auto;
 }
 
 .name {
-  font-size: 50px;
+  font-size: 40px;
   font-weight: bold;
-  padding: 0px;
-  margin: 0px;
+  margin-left: 15px;
+  color: #ffcc00; /* Light gold color for the logo */
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4); /* Slight shadow for readability */
 }
+
