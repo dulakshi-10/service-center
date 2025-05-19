@@ -1,0 +1,34 @@
+.prices-container {
+    padding: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+    font-family: Arial, sans-serif;
+  }
+  
+  .price-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 30px;
+  }
+  
+  .price-table th,
+  .price-table td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .price-table th {
+    background-color: #f4f4f4;
+  }
+  
+  .price-table tr:nth-child(even) {
+    background-color: #fafafa;
+  }
+  
+  h2 {
+    margin-top: 40px;
+    margin-bottom: 15px;
+    color: #333;
+  }
+  

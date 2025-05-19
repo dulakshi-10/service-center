@@ -8,7 +8,9 @@ import Dashboard from './pages/Dashboard/Dashboard';
 import OrderService from './pages/OrderAService/orderAService'
 import VehicleManagement from './pages/ManageVehical/manageVehical'
 import Prices from './pages/Prices/Prices';
+
 import './App.css';
+
 
 function App() {
     return (
@@ -26,6 +28,7 @@ function App() {
                             <Route path="order" element={<OrderService />} />
                             <Route path="manage-vehicle" element={<VehicleManagement />} />
                             <Route path="prices" element={<Prices />} />
+                            
                         </Route>
                     </Routes>
                 </div>
