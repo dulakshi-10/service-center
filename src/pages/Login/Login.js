@@ -35,7 +35,8 @@ function Login() {
                 setUser({
                     id: data.id,
                     name: data.name,
-                    email: data.email
+                    email: data.email,
+                    isAdmin: data.isAdmin
                 }); 
                 navigate('/dashboard'); // Redirect to dashboard after successful login
             } else {

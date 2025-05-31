@@ -5,12 +5,12 @@ const bcrypt = require('bcryptjs');
 const bodyParser = require('body-parser');
 const nodemailer = require('nodemailer');
 const { authenticateJWT } = require('./middleware'); // Import JWT middleware
-
+const cors = require('cors');
 const app = express();
 
 // Middleware to parse JSON request bodies
 app.use(bodyParser.json());
-
+app.use(cors()); // ✅ enable CORS for all routes
 // Set up the database connection
 const db = mysql.createConnection({
     host: 'localhost', 
@@ -84,7 +84,7 @@ app.post('/login', (req, res) => {
             const payload = { userId: results[0].id };
             const token = jwt.encode(payload, SECRET_KEY);
 
-            res.json({ message: 'Login successful', token, id: results[0].id, name: results[0].name, email: results[0].email });
+            res.json({ message: 'Login successful', token, id: results[0].id, name: results[0].name, email: results[0].email, isAdmin: results[0].isAdmin });
         });
     });
 });
@@ -103,75 +103,98 @@ app.post('/create-order', (req, res) => {
         isAdvancePaid
     } = req.body;
 
-
     // Validate required fields
     if (!userId || !vehicleId || !orderDate || !orderTime || !email) {
         return res.status(400).json({ message: 'Missing required fields' });
     }
 
-    const query = `
-        INSERT INTO vehicle_service_orders 
-        (user_id, vehicle_id, washing_type, oil_check_type, additional_services, order_date, order_time, additional_note, isAdvancePaid)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+    // First, check how many existing orders are there for the same date and time
+    const checkQuery = `
+        SELECT COUNT(*) AS count
+        FROM vehicle_service_orders
+        WHERE order_date = ? AND order_time = ?
     `;
 
-    db.query(
-        query,
-        [userId, vehicleId, washingType, oilCheckType, additionalServices, orderDate, orderTime, additionalNote, isAdvancePaid],
-        (err, result) => {
-            if (err) {
-                console.error('Error inserting data:', err);
-                return res.status(500).json({ message: 'Error creating order' });
-            }
+    db.query(checkQuery, [orderDate, orderTime], (checkErr, checkResult) => {
+        if (checkErr) {
+            console.error('Error checking existing orders:', checkErr);
+            return res.status(500).json({ message: 'Server error while checking time slot availability' });
+        }
 
-            // Sending confirmation email
-            const transporter = nodemailer.createTransport({
-                service: 'gmail',
-                auth: {
-                    user: "sachithservice@gmail.com",
-                    pass: "rrty hmmt nxhv evdi",
-                },
-            });
+        const existingCount = checkResult[0].count;
 
-            const mailOptions = {
-                from: "sachithservice@gmail.com",
-                to: "sachithservice@gmail.com",
-                subject: 'Order Request',
-                text: `
-                    Dear Admin,
-                    
-                    Order request has been successfully created with the following details:
-                    
-                    Customer: ${email || 'None'}
-                    Vehicle: ${vehicleId}
-                    Washing Type: ${washingType}
-                    Oil Check Type: ${oilCheckType}
-                    Additional Services: ${additionalServices || 'None'}
-                    Order Date: ${orderDate}
-                    Order Time: ${orderTime}
-                    Additional Note: ${additionalNote || 'None'}
-                    Advanced paid: Yes
-                                        
-                    Best Regards,
-                    Vehicle Service Team
-                `,
-            };
-
-            transporter.sendMail(mailOptions, (mailErr, info) => {
-                if (mailErr) {
-                    console.error('Error sending email:', mailErr);
-                    return res.status(500).json({ message: 'Order created but failed to send confirmation email' });
-                }
-
-                res.status(200).json({
-                    message: 'Order created successfully',
-                    orderId: result.insertId,
-                    emailStatus: 'Confirmation email sent',
-                });
+        if (existingCount >= 3) {
+            return res.status(400).json({
+                message: 'The selected date and time slot is fully booked. Please choose another slot.'
             });
         }
-    );
+
+        // Proceed with order creation
+        const insertQuery = `
+            INSERT INTO vehicle_service_orders 
+            (user_id, vehicle_id, washing_type, oil_check_type, additional_services, order_date, order_time, additional_note, isAdvancePaid)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+        `;
+
+        db.query(
+            insertQuery,
+            [userId, vehicleId, washingType, oilCheckType, additionalServices, orderDate, orderTime, additionalNote, isAdvancePaid],
+            (insertErr, result) => {
+                if (insertErr) {
+                    console.error('Error inserting data:', insertErr);
+                    return res.status(500).json({ message: 'Error creating order' });
+                }
+
+                // Sending confirmation email
+                const transporter = nodemailer.createTransport({
+                    service: 'gmail',
+                    auth: {
+                        user: "sachithservice@gmail.com",
+                        pass: "rrty hmmt nxhv evdi",
+                    },
+                });
+
+                const mailOptions = {
+                    from: "sachithservice@gmail.com",
+                    to: "sachithservice@gmail.com",
+                    subject: 'Order Request',
+                    text: `
+                        Dear Admin,
+                        
+                        Order request has been successfully created with the following details:
+                        
+                        Customer: ${email || 'None'}
+                        Vehicle: ${vehicleId}
+                        Washing Type: ${washingType}
+                        Oil Check Type: ${oilCheckType}
+                        Additional Services: ${additionalServices || 'None'}
+                        Order Date: ${orderDate}
+                        Order Time: ${orderTime}
+                        Additional Note: ${additionalNote || 'None'}
+                        Advanced paid: ${isAdvancePaid ? 'Yes' : 'No'}
+                                            
+                        Best Regards,
+                        Vehicle Service Team
+                    `,
+                };
+
+                transporter.sendMail(mailOptions, (mailErr, info) => {
+                    if (mailErr) {
+                        console.error('Error sending email:', mailErr);
+                        return res.status(500).json({ message: 'Order created but failed to send confirmation email' });
+                    }
+
+                    res.status(200).json({
+                        message: 'Order created successfully',
+                        orderId: result.insertId,
+                        emailStatus: 'Confirmation email sent',
+                    });
+                });
+            }
+        );
+    });
 });
+
 
 app.post('/vehicles/add', (req, res) => {
     const {
@@ -259,6 +282,104 @@ app.post('/vehicles/my', async (req, res) => {
 
     res.json(results);
   });
+});
+
+app.post('/orders', async (req, res) => {
+    const query = 'SELECT * FROM vehicle_service_orders';
+    db.query(query, (err, results) => {
+      if (err) return res.status(500).json({ message: 'Error fetching orders' });
+      res.json(results);
+    });
+  });
+  
+app.get('/orders/details', (req, res) => {
+    const query = `
+    SELECT 
+        o.order_id,
+        o.order_date,
+        o.order_time,
+        o.washing_type,
+        o.oil_check_type,
+        o.additional_services,
+        o.additional_note,
+        o.payment,
+        v.registration_number,
+        u.name AS user_name,
+        u.email AS user_email
+    FROM vehicle_service_orders o
+    JOIN vehicles v ON o.vehicle_id = v.id
+    JOIN users u ON o.user_id = u.id
+    ORDER BY o.order_date DESC, o.order_time DESC
+`;
+
+
+    db.query(query, (err, results) => {
+        if (err) {
+            console.error('Error fetching order details:', err);
+            return res.status(500).json({ message: 'Server error fetching order details' });
+        }
+
+        res.json(results);
+    });
+});
+
+app.put('/orders/:id', (req, res) => {
+  const orderId = req.params.id;
+  const { additional_services, payment } = req.body;
+
+  const sql = `
+    UPDATE vehicle_service_orders
+    SET additional_services = ?, payment = ?
+    WHERE order_id = ?
+  `;
+
+  db.query(sql, [additional_services, payment, orderId], (err, result) => {
+    if (err) {
+      console.error('Error updating order:', err);
+      return res.status(500).json({ error: 'Failed to update order' });
+    }
+    res.json({ message: 'Order updated successfully' });
+  });
+});
+
+app.get('/reporting/summary', (req, res) => {
+    const { startDate, endDate } = req.query;
+
+    if (!startDate || !endDate) {
+        return res.status(400).json({ message: 'Start and end dates are required' });
+    }
+
+    const start = new Date(startDate);
+    const end = new Date(endDate);
+    const today = new Date();
+
+    if (end < start) {
+        return res.status(400).json({ message: 'End date must be after or equal to start date' });
+    }
+
+    if (end > today) {
+        return res.status(400).json({ message: 'End date cannot be in the future' });
+    }
+
+    const query = `
+        SELECT 
+            YEAR(order_date) AS year,
+            MONTH(order_date) AS month,
+            COUNT(*) AS total_orders,
+            SUM(payment) AS total_advance
+        FROM vehicle_service_orders
+        WHERE order_date BETWEEN ? AND ?
+        GROUP BY YEAR(order_date), MONTH(order_date)
+        ORDER BY year, month
+    `;
+
+    db.query(query, [startDate, endDate], (err, results) => {
+        if (err) {
+            console.error('Error fetching report summary:', err);
+            return res.status(500).json({ message: 'Server error fetching report summary' });
+        }
+        res.json(results);
+    });
 });
 
 
