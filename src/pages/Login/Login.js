@@ -18,7 +18,6 @@ function Login() {
         };
 
         try {
-            // Send the POST request to the backend
             const response = await fetch('/login', {
                 method: 'POST',
                 headers: {
@@ -27,10 +26,8 @@ function Login() {
                 body: JSON.stringify(requestBody),
             });
 
-            // Handle response from the backend
             if (response.ok) {
                 const data = await response.json();
-                // Save the token to localStorage
                 saveToken(data.token);
                 setUser({
                     id: data.id,
@@ -38,7 +35,7 @@ function Login() {
                     email: data.email,
                     isAdmin: data.isAdmin
                 }); 
-                navigate('/dashboard'); // Redirect to dashboard after successful login
+                navigate('/dashboard');
             } else {
                 const errorData = await response.json();
                 alert(`Error: ${errorData.message || 'Something went wrong'}`);
@@ -53,7 +50,16 @@ function Login() {
     };
 
     return (
-        <div className='outer-container'>
+        <div 
+            className='outer-container' 
+            style={{ 
+                backgroundImage: "url('/images/1.jpg')", 
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                backgroundRepeat: 'no-repeat',
+                minHeight: '100vh'
+            }}
+        >
             <div className="login-container">
                 <h2 className='login-text'>Login</h2>
                 <form className="login-form">

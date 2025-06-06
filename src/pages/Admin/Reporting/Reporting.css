@@ -10,7 +10,7 @@
 
 .reporting-title {
   text-align: center;
-  font-size: 32px;
+  font-size: 50px;
   color: #222;
   font-weight: 600;
   margin-bottom: 30px;
@@ -19,8 +19,8 @@
 .date-selector {
   display: flex;
   justify-content: space-between;
-  gap: 20px;
-  margin-bottom: 30px;
+  gap: 30px;
+  margin-bottom: 40px;
   flex-wrap: wrap;
 }
 
@@ -28,7 +28,7 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  font-weight: 600;
+  font-weight: 1000;
   color: #444;
 }
 
@@ -75,25 +75,25 @@
 }
 
 .report-table th {
-  background-color: #0066cc;
-  color: white;
+  background-color: #16a0aa;
+  color: rgb(31, 26, 26);
   font-weight: 600;
-  font-size: 15px;
+  font-size: 30px;
   letter-spacing: 0.5px;
 }
 
 .report-table tr:nth-child(even) {
-  background-color: #f2f6fc;
+  background-color: #6e8391;
 }
 
 .report-table td {
-  font-size: 14px;
+  font-size: 35px;
   color: #333;
 }
 
 .report-table td:last-child {
   font-weight: bold;
-  color: #0275d8;
+  color: #e0121c;
 }
 
 @keyframes fadeIn {
@@ -107,7 +107,7 @@
   }
 
   .report-table th, .report-table td {
-    font-size: 13px;
+    font-size: 50px;
     padding: 10px;
   }
 }

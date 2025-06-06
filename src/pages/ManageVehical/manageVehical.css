@@ -5,7 +5,7 @@
   padding: 40px;
   background-color: #fefefe;
   border-radius: 16px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 20px rgba(24, 15, 15, 0.932);
   display: flex;
   flex-direction: column;
   gap: 30px;
@@ -66,8 +66,8 @@
 }
 
 .Add-btn {
-  padding: 14px 24px;
-  background-color: #4caf50;
+  padding: 20px 30px;
+  background-color: #289cd1;
   color: white;
   font-size: 20px;
   border: none;
@@ -78,7 +78,7 @@
 }
 
 .Add-btn:hover {
-  background-color: #43a047;
+  background-color: #cfae17;
 }
 
 .vehicle-list {
@@ -105,14 +105,14 @@
 }
 
 .car-card-title {
-  font-size: 22px;
+  font-size: 52px;
   font-weight: 600;
   color: #2c3e50;
   margin-bottom: 10px;
 }
 
 .car-card p {
-  font-size: 16px;
+  font-size: 25px;
   color: #555;
   margin-bottom: 6px;
 }

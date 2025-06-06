@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './Register.css';  // Importing CSS file
+import './Register.css';
 import { useNavigate } from 'react-router-dom';
 
 function Register() {
@@ -13,7 +13,6 @@ function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Check if any field is empty
     if (!fullName || !email || !phoneNumber || !password || !confirmPassword) {
       alert("All fields are required!");
       return;
@@ -24,15 +23,14 @@ function Register() {
       return;
     }
 
-    // Create the request payload
     const requestBody = {
       name: fullName,
       email,
       telephone: phoneNumber,
       password,
     };
+
     try {
-      // Send the POST request to the backend
       const response = await fetch('/register', {
         method: 'POST',
         headers: {
@@ -41,11 +39,9 @@ function Register() {
         body: JSON.stringify(requestBody),
       });
 
-      // Handle response from the backend
       if (response.ok) {
         const data = await response.json();
         navigate('/login');
-        
       } else {
         const errorData = await response.json();
         alert(`Error: ${errorData.message || 'Something went wrong'}`);
@@ -56,7 +52,16 @@ function Register() {
   };
 
   return (
-    <div className="outer-container">
+    <div
+      className="outer-container"
+      style={{
+        backgroundImage: "url('/images/1.jpg')",
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+        minHeight: '100vh'
+      }}
+    >
       <div className="register-container">
         <h2>Register</h2>
         <form onSubmit={handleSubmit} className="register-form">
@@ -134,4 +139,3 @@ function Register() {
 }
 
 export default Register;
-

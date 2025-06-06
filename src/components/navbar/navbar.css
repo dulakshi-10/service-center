@@ -2,7 +2,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #1e3a8a; /* Navy Blue */
+  background-color: #4a5179; /* Navy Blue */
   padding: 10px 30px;
   position: sticky;
   top: 0;
@@ -11,7 +11,7 @@
 }
 
 .login-button {
-  background-color: #4A90E2;  /* Soft blue */
+  background-color: #1f2122;  /* Soft blue */
   color: white;
   padding: 12px 24px;
   font-size: 20px;
@@ -43,7 +43,7 @@
 
 /* Logo styles */
 .logo-image {
-  height: 80px;
+  height: 100px;
   width: auto;
 }
 

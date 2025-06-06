@@ -1,34 +1,47 @@
 .prices-container {
-    padding: 20px;
-    max-width: 900px;
-    margin: 0 auto;
-    font-family: Arial, sans-serif;
-  }
-  
-  .price-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 30px;
-  }
-  
-  .price-table th,
-  .price-table td {
-    border: 1px solid #ccc;
-    padding: 10px;
-    text-align: center;
-  }
-  
-  .price-table th {
-    background-color: #f4f4f4;
-  }
-  
-  .price-table tr:nth-child(even) {
-    background-color: #fafafa;
-  }
-  
-  h2 {
-    margin-top: 40px;
-    margin-bottom: 15px;
-    color: #333;
-  }
-  
+  padding: 20px;
+  max-width: 900px;
+  margin: 0 auto;
+  font-family: Arial, sans-serif;
+  font-size: 25px;
+}
+
+.price-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 30px;
+  font-size: 25px;
+}
+
+.price-table th,
+.price-table td {
+  border: 1px solid #ccc;
+  padding: 20px;
+  text-align: center;
+  font-size: 25px;
+  color: #000;           /* kalu akuru */
+  font-weight: bold;     /* bold akuru */
+}
+
+.price-table th {
+  background-color: #5c9797;
+  font-size: 30px;
+}
+
+.price-table tr:nth-child(even) {
+  background-color: #fafafa;
+}
+
+.white-cell {
+  background-color: #ffffff !important;
+  color: #000;
+  font-weight: bold;
+}
+
+h2 {
+  margin-top: 26px;
+  margin-bottom: 15px;
+  color: #992c2c;
+  font-size: 50px;
+  font-weight: bold;
+}

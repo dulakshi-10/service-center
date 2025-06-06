@@ -5,7 +5,7 @@ function Home() {
   return (
     <div 
       className="home-container" 
-      style={{ backgroundImage: `url('/images/1.jpg')` }}
+      style={{ backgroundImage: `url('/images/w.jpeg')` }}
     >
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
